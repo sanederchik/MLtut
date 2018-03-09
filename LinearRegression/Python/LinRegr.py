@@ -20,14 +20,20 @@ class SimpleLinearRegression(LinRegression):
         mean_y = 0
         mean_xy = 0
         mean_x_sq = 0
+        len_x = len(self.x)
 
-        for i in np.arange(0, len(self.x), 1):
+        for i in np.arange(0, len_x, 1):
 
             mean_x += self.x[i]
             mean_y += self.y[i]
             mean_xy += self.x[i] * self.y[i]
             mean_x_sq += self.x[i]**2
 
+        mean_x = mean_x / len_x
+        mean_y = mean_y / len_x
+        mean_xy = mean_xy / len_x
+        mean_x_sq = mean_x_sq  / len_x
+        
         self.b1 = (mean_xy - mean_x * mean_y) / (mean_x_sq - mean_x**2)
         self.a = mean_y - self.b1 * mean_x
 
